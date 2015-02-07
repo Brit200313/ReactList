@@ -64,9 +64,22 @@ ListStore = {
         url: "https://listalous.herokuapp.com/lists/brit200313/items/" + itemId,
       });
 
-    deleteItem.done(function() {
+      deleteItem.done(function() {
+        ListStore.loadItems()
+      });
+    }
+  },
+  editItem: function(itemId, description) {
+    var item = findItemById(itemId)
+
+    var editItem = $.ajax({
+      type: 'PUT',
+      url: "https://listalous.herokuapp.com/lists/brit200313/items/" + itemId,
+      data: { description: description }
+    });
+
+    editItem.done(function() {
       ListStore.loadItems()
     });
-    }
   }
 }
