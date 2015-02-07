@@ -25,6 +25,7 @@ ListStore = {
       items = dataFromServer.items
       notifyComponents()
     }) 
+    return loadRequest
   },  
   addItem: function(itemDescription) {
     var creationRequest = $.ajax({
@@ -52,5 +53,17 @@ ListStore = {
       item.completed = itemData.completed
       notifyComponents()
     })
+  },
+  deleteItem: function(itemId) {
+    var item = findItemById(itemId)
+
+    var deleteItem = $.ajax({
+      type: 'DELETE',
+      url: "https://listalous.herokuapp.com/lists/brit200313/items/" + itemId,
+    })
+
+    deleteItem.done(function() {
+      ListStore.loadItems()
+    });
   }
 }
