@@ -57,13 +57,16 @@ ListStore = {
   deleteItem: function(itemId) {
     var item = findItemById(itemId)
 
-    var deleteItem = $.ajax({
-      type: 'DELETE',
-      url: "https://listalous.herokuapp.com/lists/brit200313/items/" + itemId,
-    })
+    var r = confirm("Hey! Are you sure you want to delete: " + item.description);
+    if (r == true) {
+      var deleteItem = $.ajax({
+        type: 'DELETE',
+        url: "https://listalous.herokuapp.com/lists/brit200313/items/" + itemId,
+      });
 
     deleteItem.done(function() {
       ListStore.loadItems()
     });
+    }
   }
 }
