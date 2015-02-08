@@ -43,7 +43,7 @@
         return (
           <li className={itemClass}>
             <span className='complete-button' onClick={this.handleComplete}>{'\u2714'}</span>
-            <div className='description'>{this.props.description}</div>
+            <div className='description' contentEditable={true} onBlur={this.handleEdit}>{this.props.description}</div>
             <span className='delete-button' onClick={this.handleDelete}>{'\u2718'}</span>
           </li>
         )
@@ -53,6 +53,10 @@
       },
       handleDelete: function() {
         ListStore.deleteItem(this.props.id)
+      },
+      handleEdit: function(event) {
+        var newDescription = $(event.target).text()
+        ListStore.editItem(this.props.id, newDescription )
       }
     })
 
